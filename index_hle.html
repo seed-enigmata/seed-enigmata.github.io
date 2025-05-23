@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description"
+        content="Enigmata: Scaling Logical Reasoning in Large Language Models with Synthetic Verifiable Puzzles" />
+    <meta name="keywords" content="Enigmata, puzzle, logical, reasoning, large lanuge model, LLM" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Enigmata: Scaling Logical Reasoning in Large Language Models with Synthetic Verifiable Puzzles</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/fontawesome.all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+    <link rel="stylesheet" href="./css/index.css" /> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./js/fontawesome.all.min.js"></script>
+    <script src="./js/index.js"></script> <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Apply custom table styles ONLY to elements within the .my-tables container */
+        .my-tables table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .my-tables caption {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: left;
+            padding: 5px 0;
+        }
+        .my-tables th, .my-tables td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .my-tables th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #555;
+        }
+        .my-tables thead th {
+            background-color: #e6e6e6;
+        }
+        .my-tables tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .my-tables tbody tr:hover {
+            background-color: #eef;
+        }
+        .my-tables .text-left { /* If this class is specifically for tables, scope it */
+            text-align: left;
+        }
+        .my-tables .header-group { /* If this class is specifically for tables, scope it */
+            text-align: center;
+        }
+        /* Keep other styles as needed if they are truly global and non-conflicting */
+        .highlight-enigmata {
+            background-color: #e0c9f0; /* Light yellow for highlighting */
+        }
+        .emphasize-enigmata {
+            background-color: #b410eb; /* Gold color for extra emphasis */
+            font-weight: bold;
+        }
+        .col-model { width: 20%; }
+        .col-puzzle { width: 15%; }
+        .col-math { width: 10%; }
+
+        /* Ensure text wrapping for dataset boxes */
+        .whitespace-pre-wrap {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 py-10 font-sans text-base text-gray-800">
+    <div class="my-tables mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 mb-10">
+        <h2>My Data Table</h2>
+        <table>
+            <caption>Some Important Data</caption>
+            <thead>
+                <tr>
+                    <th>Header 1</th>
+                    <th>Header 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Data 1</td>
+                    <td>Data 2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="mb-4 text-center text-3xl font-extrabold text-gray-900">精选数据集</h2>
+        <div class="mx-auto mb-8 h-1 w-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"></div>
+        <p class="text-lg leading-relaxed text-gray-600 text-center mb-10">
+            浏览我们多样化的数据集，每个数据集代表一个独特的问题类别，并附有图片说明。
+        </p>
+
+        <div class="bg-white p-6 rounded-lg shadow-xl border border-gray-200">
+            <div class="mb-4 flex items-center justify-between border-b pb-4">
+                <h3 class="text-xl font-semibold text-gray-800">
+                    当前页: <span id="current-page-index">1</span>/<span id="total-pages"></span>
+                </h3>
+                <div class="flex space-x-2">
+                    <button id="prev-page-btn"
+                        class="p-2 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-chevron-left h-5 w-5 text-gray-600">
+                            <path d="m15 18-6-6 6-6"></path>
+                        </svg>
+                    </button>
+                    <button id="next-page-btn"
+                        class="p-2 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-chevron-right h-5 w-5 text-gray-600">
+                            <path d="m9 18 6-6-6-6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="dataset-display-area" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        const datasets = [
+            // Your 37 datasets go here, as provided in the previous response.
+            // ... (rest of your datasets array)
+            {
+                category: "经典文学分析",
+                image: "https://via.placeholder.com/300x200/FF5733/FFFFFF?text=Classic+Lit", // 替换为你的图片路径
+                description: "深入分析经典文学作品的主题、人物塑造、叙事技巧和文化背景，探索其深远意义和时代价值。"
+            },
+            {
+                category: "生态环境评估",
+                image: "https://via.placeholder.com/300x200/33FF57/FFFFFF?text=Ecology+Eval", // 替换为你的图片路径
+                description: "评估不同生态系统的健康状况、生物多样性水平以及人类活动对环境的影响，提供可持续发展建议。这里的内容可以非常长，会看到滚动条。"
+            },
+            {
+                category: "计算机算法设计",
+                image: "https://via.placeholder.com/300x200/3357FF/FFFFFF?text=Algorithm+Design", // 替换为你的图片路径
+                description: "专注于设计高效且可靠的计算机算法，解决复杂的计算问题，包括数据结构优化和性能分析。"
+            },
+            {
+                category: "艺术作品赏析",
+                image: "https://via.placeholder.com/300x200/FF33DA/FFFFFF?text=Art+Apprec", // 替换为你的图片路径
+                description: "通过对绘画、雕塑、建筑等艺术作品的细致观察与分析，理解其美学价值、历史背景和文化内涵。"
+            },
+            {
+                category: "物理学前沿探索",
+                image: "https://via.placeholder.com/300x200/F0F0F0/000000?text=Physics+Frontier", // 替换为你的图片路径
+                description: "探索量子力学、相对论、宇宙学等物理学前沿领域，理解物质、能量和时空的基本规律。"
+            },
+            {
+                category: "经济政策分析",
+                image: "https://via.placeholder.com/300x200/FFC300/000000?text=Economic+Policy", // 替换为你的图片路径
+                description: "分析政府财政、货币政策、国际贸易等经济政策对市场、企业和居民生活的影响。"
+            },
+            {
+                category: "化学实验研究",
+                image: "https://via.placeholder.com/300x200/DAF7A6/000000?text=Chemistry+Exp", // 替换为你的图片路径
+                description: "进行化学实验，研究物质的组成、性质、结构和变化规律，包括有机化学、无机化学等。"
+            },
+            {
+                category: "历史事件重构",
+                image: "https://via.placeholder.com/300x200/C70039/FFFFFF?text=History+Recon", // 替换为你的图片路径
+                description: "通过历史文献、考古发现等多方证据，重构和解读重大历史事件，理解其对后世的影响。"
+            },
+            {
+                category: "生物基因工程",
+                image: "https://via.placeholder.com/300x200/900C3F/FFFFFF?text=Bio+Eng", // 替换为你的图片路径
+                description: "研究基因编辑、克隆等生物工程技术，探索其在医疗、农业和工业领域的应用潜力与伦理问题。"
+            },
+            {
+                category: "哲学思辨探讨",
+                image: "https://via.placeholder.com/300x200/581845/FFFFFF?text=Philosophy", // 替换为你的图片路径
+                description: "探讨存在、知识、价值、理性、心灵和语言等基本问题，进行逻辑思辨和批判性思考。"
+            },
+            {
+                category: "天体物理研究",
+                image: "https://via.placeholder.com/300x200/FF5733/FFFFFF?text=Astrophysics",
+                description: "研究宇宙中天体的物理性质、结构、起源和演化，包括恒星、星系、黑洞等。"
+            },
+            {
+                category: "心理行为分析",
+                image: "https://via.placeholder.com/300x200/33FF57/FFFFFF?text=Psych+Behavior",
+                description: "分析人类的思维、情感、意志和行为，探索心理现象的规律和个体差异。"
+            },
+            {
+                category: "地理地貌分析",
+                image: "https://via.placeholder.com/300x200/3357FF/FFFFFF?text=Geography",
+                description: "分析地球表面的自然和人文地貌特征、分布及其形成机制，包括气候、水文、土壤等。"
+            },
+            {
+                category: "社会结构研究",
+                image: "https://via.placeholder.com/300x200/FF33DA/FFFFFF?text=Sociology",
+                description: "研究社会群体的组织、结构、功能及其变迁，分析社会制度、社会问题和文化现象。"
+            },
+            {
+                category: "语言学规律探究",
+                image: "https://via.placeholder.com/300x200/F0F0F0/000000?text=Linguistics",
+                description: "探究人类语言的本质、结构、发展和使用规律，包括语音学、语法学、语义学等。"
+            },
+            {
+                category: "政治体系比较",
+                image: "https://via.placeholder.com/300x200/FFC300/000000?text=Political+System",
+                description: "比较不同国家和地区的政治制度、政府运作模式、权力结构和政治文化。"
+            },
+            {
+                category: "医学诊断技术",
+                image: "https://via.placeholder.com/300x200/DAF7A6/000000?text=Medical+Diag",
+                description: "研究各种疾病的诊断方法、治疗手段和预防措施，包括影像学、实验室诊断等。"
+            },
+            {
+                category: "环境政策制定",
+                image: "https://via.placeholder.com/300x200/C70039/FFFFFF?text=Env+Policy",
+                description: "研究环境问题，制定和评估环境保护政策，促进可持续发展和资源管理。"
+            },
+            {
+                category: "统计数据分析",
+                image: "https://via.placeholder.com/300x200/900C3F/FFFFFF?text=Stats+Analysis",
+                description: "运用统计学方法对数据进行收集、整理、分析和解释，从中发现规律和做出预测。"
+            },
+            {
+                category: "建筑设计理论",
+                image: "https://via.placeholder.com/300x200/581845/FFFFFF?text=Arch+Theory",
+                description: "研究建筑的结构、功能、美学和历史，探讨不同建筑风格的特点和设计理念。"
+            },
+            {
+                category: "音乐创作与理论",
+                image: "https://via.placeholder.com/300x200/FF5733/FFFFFF?text=Music+Theory",
+                description: "研究音乐的构成要素、创作技巧和发展历史，包括和声学、对位法、曲式分析等。"
+            },
+            {
+                category: "体育运动科学",
+                image: "https://via.placeholder.com/300x200/33FF57/FFFFFF?text=Sports+Sci",
+                description: "研究体育运动对人体生理和心理的影响，包括运动训练、体能评估、运动损伤预防等。"
+            },
+            {
+                category: "食品安全检测",
+                image: "https://via.placeholder.com/300x200/3357FF/FFFFFF?text=Food+Safety",
+                description: "检测食品中的有害物质、微生物和添加剂，确保食品符合安全标准，保障消费者健康。"
+            },
+            {
+                category: "教育方法创新",
+                image: "https://via.placeholder.com/300x200/FF33DA/FFFFFF?text=Edu+Method",
+                description: "研究和创新教育教学方法、课程设计和评估体系，提升教育质量和学习效果。"
+            },
+            {
+                category: "法律案例分析",
+                image: "https://via.placeholder.com/300x200/F0F0F0/000000?text=Legal+Case",
+                description: "分析真实法律案例，理解法律原则、判例法和司法程序，培养法律思维。"
+            },
+            {
+                category: "军事战略研究",
+                image: "https://via.placeholder.com/300x200/FFC300/000000?text=Military+Strategy",
+                description: "研究军事理论、战略战术和战争史，分析军事冲突的起因、发展和结果。"
+            },
+            {
+                category: "地质构造分析",
+                image: "https://via.placeholder.com/300x200/DAF7A6/000000?text=Geology+Struc",
+                description: "分析地球内部和表面的地质构造、岩石类型和地质灾害，研究地球的形成和演化。"
+            },
+            {
+                category: "农业技术发展",
+                image: "https://via.placeholder.com/300x200/C70039/FFFFFF?text=Agri+Tech",
+                description: "研究农作物种植、畜牧养殖、病虫害防治等农业技术，提高农产品产量和质量。"
+            },
+            {
+                category: "通信网络优化",
+                image: "https://via.placeholder.com/300x200/900C3F/FFFFFF?text=Comm+Net",
+                description: "优化通信网络性能、安全性和可靠性，包括无线通信、光纤通信、网络协议等。"
+            },
+            {
+                category: "材料科学创新",
+                image: "https://via.placeholder.com/300x200/581845/FFFFFF?text=Material+Sci",
+                description: "研究新材料的制备、性能和应用，包括纳米材料、复合材料、智能材料等。"
+            },
+            {
+                category: "人工智能应用",
+                image: "https://via.placeholder.com/300x200/FF5733/FFFFFF?text=AI+App",
+                description: "开发和应用人工智能技术，解决实际问题，包括机器学习、深度学习、自然语言处理等。"
+            },
+            {
+                category: "机器人运动控制",
+                image: "https://via.placeholder.com/300x200/33FF57/FFFFFF?text=Robot+Motion",
+                description: "研究机器人的运动学、动力学和控制算法，实现机器人的精确运动和任务执行。"
+            },
+            {
+                category: "金融市场分析",
+                image: "https://via.placeholder.com/300x200/3357FF/FFFFFF?text=Finance+Market",
+                description: "分析股票、债券、期货等金融市场的运作规律，进行投资决策和风险管理。"
+            },
+            {
+                category: "城市规划设计",
+                image: "https://via.placeholder.com/300x200/FF33DA/FFFFFF?text=Urban+Plan",
+                description: "规划和设计城市空间、基础设施和社会服务，提升城市宜居性和可持续性。"
+            },
+            {
+                category: "考古遗址发掘",
+                image: "https://via.placeholder.com/300x200/F0F0F0/000000?text=Archaeology+Dig",
+                description: "发掘和研究古代遗址、文物，揭示人类历史和文化的发展进程。"
+            },
+            {
+                category: "航天器设计",
+                image: "https://via.placeholder.com/300x200/FFC300/000000?text=Aerospace+Design",
+                description: "设计和研发各类航天器，包括卫星、火箭、空间站等，实现空间探索和应用。"
+            },
+            {
+                category: "生物信息数据分析",
+                image: "https://via.placeholder.com/300x200/DAF7A6/000000?text=Bioinfo+Data",
+                description: "利用计算机技术分析生物学数据，如基因组序列、蛋白质结构等，揭示生命奥秘。"
+            }
+        ];
+
+        const datasetsPerPage = 4; // 每页显示的数据集数量
+        let currentPage = 0; // 当前页码 (0-indexed)
+
+        const totalDatasets = datasets.length;
+        const totalPages = Math.ceil(totalDatasets / datasetsPerPage);
+
+        const totalPagesSpan = document.getElementById('total-pages');
+        const currentPageIndexSpan = document.getElementById('current-page-index');
+        const datasetDisplayArea = document.getElementById('dataset-display-area');
+        const prevPageBtn = document.getElementById('prev-page-btn');
+        const nextPageBtn = document.getElementById('next-page-btn');
+
+        // 初始化总页数显示
+        totalPagesSpan.textContent = totalPages;
+
+        // 更新数据集显示内容的函数
+        function updateDatasetDisplay() {
+            // 清空当前显示区域
+            datasetDisplayArea.innerHTML = '';
+
+            const startIndex = currentPage * datasetsPerPage;
+            const endIndex = Math.min(startIndex + datasetsPerPage, totalDatasets);
+
+            // 如果当前页没有数据集，且不是第一页，则跳转到上一页
+            if (startIndex >= totalDatasets && currentPage > 0) {
+                currentPage--;
+                updateDatasetDisplay();
+                return;
+            }
+
+            for (let i = startIndex; i < endIndex; i++) {
+                const dataset = datasets[i];
+
+                // 创建单个数据集框的 HTML 结构
+                const datasetBox = document.createElement('div');
+                datasetBox.className = 'rounded-lg border shadow-sm overflow-hidden min-h-[250px] max-h-[350px] flex flex-col';
+
+                datasetBox.innerHTML = `
+                    <div class="p-3 bg-gray-100 text-gray-800 text-sm font-medium flex items-center space-x-2 flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-folder-open h-4 w-4 text-gray-600">
+                            <path d="M2 7v13a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H9l-2 2H4a2 2 0 0 0-2 2z"></path>
+                            <path d="m3 3 4 4"></path>
+                        </svg>
+                        <span class="flex-1">任务类型: <strong class="dataset-category">${dataset.category}</strong></span>
+                    </div>
+                    <div class="p-4 bg-white flex-1 overflow-y-auto flex flex-col items-center">
+                        ${dataset.image ? `<img src="${dataset.image}" alt="${dataset.category}" class="max-h-[150px] max-w-full object-contain mb-2 rounded-md">` : ''}
+                        <p class="text-gray-600 text-sm text-center whitespace-pre-wrap">${dataset.description || '暂无描述'}</p>
+                    </div>
+                `;
+                datasetDisplayArea.appendChild(datasetBox);
+            }
+
+            currentPageIndexSpan.textContent = currentPage + 1; // 更新当前页码显示
+        }
+
+        // 绑定前进按钮点击事件
+        nextPageBtn.addEventListener('click', () => {
+            currentPage++;
+            if (currentPage >= totalPages) {
+                currentPage = 0; // 回到第一页
+            }
+            updateDatasetDisplay();
+        });
+
+        // 绑定后退按钮点击事件
+        prevPageBtn.addEventListener('click', () => {
+            currentPage--;
+            if (currentPage < 0) {
+                currentPage = totalPages - 1; // 回到最后一页
+            }
+            updateDatasetDisplay();
+        });
+
+        // 页面加载时显示第一页数据集
+        updateDatasetDisplay();
+    </script>
+</body>
+</html>
