@@ -89,9 +89,11 @@
                     <h2 class="title is-3">Introduction</h2>
                     <div class="content">
                         <p>
-                            Introducing Enigmata, a comprehensive suite designed to significantly enhance the logical reasoning capabilities of Large Language Models (LLMs). While LLMs excel at complex reasoning tasks like math and coding, they often struggle with puzzles that require pure logical deduction without domain-specific knowledge. Enigmata addresses this gap by offering a unified, controllable framework for training and evaluating LLMs on a diverse range of puzzle tasks.
+                            We introduce <strong>ENIGMATA</strong>, the first comprehensive suite tailored for improving LLMs with puzzle reasoning skills. It includes 36 tasks across 7 categories, each with: (1) a generator that produces unlimited examples with controllable difficulty, and (2) a rule-based verifier for automatic evaluation. This generator-verifier design supports scalable, multi-task RL training, fine-grained analysis, and seamless RLVR integration.
                         </p>
-                        <p>
+                        <p>We further propose <strong>ENIGMATA-Eval</strong>, a rigorous benchmark, and develop optimized multi-task RLVR strategies. Our trained model, <strong>Qwen2.5-32B-ENIGMATA</strong>, consistently surpasses o3-mini-high and o1 on the puzzle reasoning benchmarks like ENIGMATA-Eval, ARC-AGI, and ARC-AGI 2. It also generalizes well to out-of-domain puzzle benchmarks and mathematical reasoning, with little multitasking trade-off.
+                            </p>
+                        <!-- <p>
                             Our key contributions are:
                             <ul>
                                 <li>We introduce Enigmata, the first suite for enabling LLMs with advanced and comprehensive logical reasoning abilities for solving puzzles.</li>
@@ -101,7 +103,7 @@
                                 <li>We establish Enigmata-Eval, a benchmark that rigorously and comprehensively evaluates puzzle
                                     reasoning abilities, and propose the Enigmata-Model recipe that trains models with superior performance
                                     on in-domain and OOD puzzle reasoning tasks.</li>
-                                </ul>
+                                </ul> -->
 
                     </div>
                 </div>
@@ -114,10 +116,14 @@
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-10">
-                    <h2 class="title is-3">Enigmata-Data: The Puzzle Dataset</h2>
+                    <h2 class="title is-3">🧩 Enigmata-Data: Synthetic Verifiable Puzzle Generation</h2>
                     <div class="content">
-                        <p>Enigmata-Data is a comprehensive dataset designed to enhance and evaluate
-                        complex reasoning capabilities of LLMs in RLVR training.</p>
+                        <p>ENIGMATA-Data comprises 36 distinct task types spanning 7 categories of logical reasoning puzzles. Each task is built with two core components:</p>
+                        <ul>
+                            <li>Generator: Produces unlimited puzzle instances with precisely controllable difficulty parameters</li>
+                            <li>Verifier: Provides automatic, rule-based solution validation for reliable evaluation</li>
+                          </ul>
+                        <p>For comprehensive details on each task, please refer to our task documentation.</p>
                     </div>
                     <div
                         style="background-color: #f8fafc; border-radius: 12px; border-left: 6px solid #3a76ed; padding: 1.2rem; margin-bottom: 1.5rem;">
@@ -128,8 +134,8 @@
                                         1
                                     </div>
                                     <div>
-                                        <p style="margin: 0; line-height: 1.4;"><strong>Diverse Puzzle Categories:</strong>
-                                            It features 36 puzzle tasks across 7 diverse categories, including Crypto, Arithmetic, Logic, Grid, Graph, Search, and Sequential puzzles.</p>
+                                        <p style="margin: 0; line-height: 1.4;"><strong>Unlimited Self-Verifying Data: </strong>
+                                            It can generate an unlimited supply of self-verifying puzzle prompts, which plug seamlessly into the RLVR framework and support long chain-of-thought training.</p>
                                     </div>
                                 </div>
                         
@@ -139,7 +145,7 @@
                                         2
                                     </div>
                                     <div>
-                                    <p style="margin: 0; line-height: 1.4;"><strong>Data Construction</strong> Data is constructed in three phases: collecting and designing tasks, developing auto-generators and verifiers, and controlling difficulty levels.</p>
+                                    <p style="margin: 0; line-height: 1.4;"><strong>Controlled Difficulty:</strong> Programmatic difficulty control allows researchers to mix puzzles in desired difficulty ratios and to conduct fine-grained experiments on how curriculum design influences reinforcement learning.</p>
                                     </div>
                                 </div>
 
@@ -149,7 +155,7 @@
                                         3
                                     </div>
                                     <div>
-                                        <p style="margin: 0; line-height: 1.4;"><strong>Systematic Evaluation:</strong> Enigmata-Eval systematically samples 4,758 puzzle instances across varying difficulty levels to evaluate model performance.</p>
+                                        <p style="margin: 0; line-height: 1.4;"><strong>Flexible Task Sampling:</strong> Generators can emit arbitrary sample counts per task, enabling studies of task balancing and cross-task generalization.</p>
                                     </div>
                                 </div>                                
                         </div>
@@ -455,12 +461,32 @@
             </div>
         </div>
     </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-10">
+                    <h2 class="title is-3">⚖️ Enigmata-Eval: Evaluating Logical Reasoning Capabilities</h2>
+                    <div class="content">
+                        <p>ENIGMATA-Eval is a comprehensive benchmark containing 4,758 puzzle instances across Easy, Medium, and Hard difficulty levels. Each task provides 50 instances per difficulty level where possible, with strict train-eval separation to prevent data leakage.</p>
+
+                        <p>📥 <strong>Download ENIGMATA-Eval</strong>: <a href="https://www.google.com">HuggingFace Dataset</a></p>
+                    
+         
+
+                
+                
+                
+                </div>
+            </div>
+        </div>
+    </section>
     
     <section class="section">
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-10">
-                    <h2 class="title is-3">Enigmata-Model: The Training Recipe</h2>
+                    <h2 class="title is-3">🤖 Enigmata-Model: The Training Recipe</h2>
                     <div class="content">
                         <p>Our training methodology follows a two-stage process designed to systematically build reasoning abilities: 
                             (1) rejection fine-tuning to establish foundational reasoning patterns, and 
@@ -513,162 +539,11 @@
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-10">
-                    <h2 class="title is-3">Performance and Evaluation</h2>
+                    <h2 class="title is-3">Performance Results</h2>
                     <div class="content">
                         
-                        <!-- <table>
-                            <caption>Table 3 Performance of reasoning, generic, and our trained LLMs on reasoning benchmarks.</caption>
-                            <thead>
-                                <tr>
-                                    <th rowspan="2" class="col-model text-left">Model</th>
-                                    <th colspan="4" class="header-group">Puzzle</th>
-                                    <th colspan="1" class="header-group">Math</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="3">In-Domain</th>
-                                    <th>Out-of-Domain</th>
-                                    <th>AIME 24</th>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <th>ARC-AGI 1</th>
-                                    <th>ARC-AGI 2</th>
-                                    <th>Enigmata-Eval</th>
-                                    <th>KORBench</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-left">o4-mini-high</td>
-                                    <td>54.7</td>
-                                    <td>2.6</td>
-                                    <td>65.1</td>
-                                    <td>72.7</td>
-                                    <td>92.3</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">o3-mini-high</td>
-                                    <td>25.8</td>
-                                    <td>0.4</td>
-                                    <td>59.9</td>
-                                    <td>69.6</td>
-                                    <td>79.3</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">o1</td>
-                                    <td>29.0</td>
-                                    <td>0.4</td>
-                                    <td>54.9</td>
-                                    <td>69.9</td>
-                                    <td>78.0</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">DeepSeek-R1</td>
-                                    <td>17.8</td>
-                                    <td>0.2</td>
-                                    <td>49.2</td>
-                                    <td>71.7</td>
-                                    <td>60.2</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">Gemini 2.5 Pro</td>
-                                    <td>22.7</td>
-                                    <td>1.4</td>
-                                    <td>50.6</td>
-                                    <td>68.2</td>
-                                    <td>90.3</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">Claude-3.7-Sonnet-Thinking</td>
-                                    <td>37.6</td>
-                                    <td>1.4</td>
-                                    <td>53.2</td>
-                                    <td>67.8</td>
-                                    <td>60.3</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">DS-R1 Distilled Qwen 32B</td>
-                                    <td>7.9</td>
-                                    <td>0.0</td>
-                                    <td>31.1</td>
-                                    <td>63.5</td>
-                                    <td>72.0</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">QWq-32B</td>
-                                    <td>7.0</td>
-                                    <td>0.0</td>
-                                    <td>43.8</td>
-                                    <td>61.8</td>
-                                    <td>69.2</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">Grok-2-1212</td>
-                                    <td>7.5</td>
-                                    <td>0.0</td>
-                                    <td>13.6</td>
-                                    <td>54.9</td>
-                                    <td>16.7</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">GPT-4o-1120</td>
-                                    <td>7.3</td>
-                                    <td>0.0</td>
-                                    <td>14.2</td>
-                                    <td>57.9</td>
-                                    <td>10.0</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">Claude 3.7 Sonnet</td>
-                                    <td>12.9</td>
-                                    <td>0.0</td>
-                                    <td>22.7</td>
-                                    <td>56.9</td>
-                                    <td>23.0</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">Qwen2.5-32B-Instruct</td>
-                                    <td>6.0</td>
-                                    <td>0.0</td>
-                                    <td>12.6</td>
-                                    <td>54.7</td>
-                                    <td>16.6</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">Qwen2.5-32B-RFT</td>
-                                    <td>8.4</td>
-                                    <td>0.0</td>
-                                    <td>46.6</td>
-                                    <td>61.0</td>
-                                    <td>62.0</td>
-                                </tr>
-                                <tr class="highlight-enigmata"> 
-                                    <td class="text-left">Qwen2.5-32B-ENIGMATA</td>
-                                    <td>32.8</td>
-                                    <td>0.6</td>
-                                    <td>62.6</td>
-                                    <td>65.0</td>
-                                    <td>60.6</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-left">Seed-Thinking-1.5v<sub>130</sub></td>
-                                    <td>37.9</td>
-                                    <td>1.0</td>
-                                    <td></td>
-                                    <td>70.0</td>
-                                    <td>87.3</td>
-                                </tr>
-                                <tr class="highlight-enigmata">
-                                    <td class="text-left">Seed-Thinking-ENIGMATA<sub>130</sub></td>
-                                    <td>37.9</td>
-                                    <td>1.0</td>
-                                    <td></td>
-                                    <td>70.0</td>
-                                    <td>87.3</td>
-                                </tr>
-                            </tbody>
-                        </table> -->
+                       
+                            
                         <div class="content">
                             <p>Our model, specifically the 32B parameter version, significantly outperforms most public models on Enigmata-Eval and ARC-AGI, showcasing enhanced general logical reasoning. This success stems from effective rejection fine-tuning (RFT) and multi-task RL strategies, which improve generalization while preserving existing math reasoning abilities.</p>
                         </div>
@@ -695,7 +570,7 @@
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-10">
-                    <h2 class="title is-3">Citation</h2>
+                    <h2 class="title is-3">📝 Citation</h2>
                     <div class="content">
                         <p>If you find this work useful, please consider citing our paper:</p>
                         <pre><code class="latex">
