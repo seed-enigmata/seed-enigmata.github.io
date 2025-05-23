@@ -93,6 +93,8 @@
                         </p>
                         <p>We further propose <strong>ENIGMATA-Eval</strong>, a rigorous benchmark, and develop optimized multi-task RLVR strategies. Our trained model, <strong>Qwen2.5-32B-ENIGMATA</strong>, consistently surpasses o3-mini-high and o1 on the puzzle reasoning benchmarks like ENIGMATA-Eval, ARC-AGI, and ARC-AGI 2. It also generalizes well to out-of-domain puzzle benchmarks and mathematical reasoning, with little multitasking trade-off.
                             </p>
+                        
+                            <strong><p style="color: #3a76ed;">ENIGMATA offers a unified, controllable framework for advancing logical reasoning in LLMs.</p></strong>
                         <!-- <p>
                             Our key contributions are:
                             <ul>
@@ -118,12 +120,8 @@
                 <div class="column is-10">
                     <h2 class="title is-3">🧩 Enigmata-Data: Synthetic Verifiable Puzzle Generation</h2>
                     <div class="content">
-                        <p>ENIGMATA-Data comprises 36 distinct task types spanning 7 categories of logical reasoning puzzles. Each task is built with two core components:</p>
-                        <ul>
-                            <li>Generator: Produces unlimited puzzle instances with precisely controllable difficulty parameters</li>
-                            <li>Verifier: Provides automatic, rule-based solution validation for reliable evaluation</li>
-                          </ul>
-                        <p>For comprehensive details on each task, please refer to our task documentation.</p>
+                        <p><strong>ENIGMATA-Data</strong> comprises <strong>36 distinct task types spanning 7 categories of logical reasoning puzzles</strong>. Each task is built with two core components: (1)<strong>Generator</strong>: Produces unlimited puzzle instances with precisely controllable difficulty parameters; (2)<strong>Verifier</strong>: Provides automatic, rule-based solution validation for reliable evaluation.</p>
+                        <!-- <p>For comprehensive details on each task, please refer to our task documentation.</p> -->
                     </div>
                     <div
                         style="background-color: #f8fafc; border-radius: 12px; border-left: 6px solid #3a76ed; padding: 1.2rem; margin-bottom: 1.5rem;">
@@ -548,7 +546,7 @@
                             <p>Our model, specifically the 32B parameter version, significantly outperforms most public models on Enigmata-Eval and ARC-AGI, showcasing enhanced general logical reasoning. This success stems from effective rejection fine-tuning (RFT) and multi-task RL strategies, which improve generalization while preserving existing math reasoning abilities.</p>
                         </div>
                         <figure>
-                            <img src="./assets/main_results1.png" alt="A descriptive alt text for your image" style="width: 600px;">
+                            <img src="./assets/main_results_1.png" alt="A descriptive alt text for your image" style="width: 600px;">
                             <figcaption style="color: gray;">Performance of reasoning, generic, and our trained LLMs on reasoning benchmarks</figcaption>
                           </figure>
                         
