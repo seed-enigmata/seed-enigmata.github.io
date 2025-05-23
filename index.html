@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./css/bulma-carousel.min.css" />
     <link rel="stylesheet" href="./css/bulma-slider.min.css" />
     <link rel="stylesheet" href="./css/fontawesome.all.min.css" />
+    <!-- <link rel="stylesheet" href="./css/fontawesome_6_7_2.all.css" /> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
     <link rel="stylesheet" href="./css/index.css" />
     <link rel="icon" href="./assets/doubao.png" type="image/png" />
@@ -34,7 +35,7 @@
             <div class="container">
                 <div class="has-text-centered">
                     <h1 class="publication-title">
-                        <span class="dnerf">Enigmata</span>: Scaling Logical Reasoning in Large Language Models with Synthetic Verifiable Puzzles
+                        <em class="dnerf">Enigmata</em>: Scaling Logical Reasoning in Large Language Models with Synthetic Verifiable Puzzles
                     </h1>
                     <div class="publication-authors">
                         <span class="author-block"><sup>1</sup>ByteDance Seed,</span>
@@ -51,6 +52,14 @@
                                     <i class="fas fa-file-pdf"></i>
                                 </span>
                                 <span>Technical Report</span>
+                            </a>
+                        </span>
+                        <span class="link-block">
+                            <a href="https://github.com/ByteDance-Seed/Seed-Coder" class="external-link button is-dark">
+                                <span class="icon">
+                                    <i class="fa fa-database"></i>
+                                </span>
+                                <span>Dataset</span>
                             </a>
                         </span>
                         <span class="link-block">
@@ -82,6 +91,18 @@
                         <p>
                             Introducing Enigmata, a comprehensive suite designed to significantly enhance the logical reasoning capabilities of Large Language Models (LLMs). While LLMs excel at complex reasoning tasks like math and coding, they often struggle with puzzles that require pure logical deduction without domain-specific knowledge. Enigmata addresses this gap by offering a unified, controllable framework for training and evaluating LLMs on a diverse range of puzzle tasks.
                         </p>
+                        <p>
+                            Our key contributions are:
+                            <ul>
+                                <li>We introduce Enigmata, the first suite for enabling LLMs with advanced and comprehensive logical reasoning abilities for solving puzzles.</li>
+                                <li>The Enigmata suite consists of Enigmata-Data, featuring <strong>36 distinct tasks across 7 categories</strong> with
+                                    controllable difficulty, scalable generation, and automatic verification, which seamlessly fit the RLVR
+                                    training paradigm.</li>
+                                <li>We establish Enigmata-Eval, a benchmark that rigorously and comprehensively evaluates puzzle
+                                    reasoning abilities, and propose the Enigmata-Model recipe that trains models with superior performance
+                                    on in-domain and OOD puzzle reasoning tasks.</li>
+                                </ul>
+
                     </div>
                 </div>
             </div>
