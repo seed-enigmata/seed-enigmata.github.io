@@ -533,6 +533,41 @@
                         </div>
                     </div>
                     </div>
+
+                    
+                    <div class="content">
+                        <h4>👀 Performance Results</h4>
+                        <div class="content">
+                            <p>Our model, specifically the 32B parameter version, significantly outperforms most public models on Enigmata-Eval and ARC-AGI, showcasing enhanced general logical reasoning. This success stems from effective rejection fine-tuning (RFT) and multi-task RL strategies, which improve generalization while preserving existing math reasoning abilities.</p>
+                        </div>
+                        <figure>
+                            <img src="./assets/main_results_1.png" alt="A descriptive alt text for your image" style="width: 600px;">
+                            <figcaption style="color: gray;">Performance of reasoning, generic, and our trained LLMs on reasoning benchmarks</figcaption>
+                          </figure>
+                        
+                          <div class="content">
+                            <p>On Enigmata-Eval, our Qwen2.5-32B-Enigmata model excels in Crypto, Arithmetic, and Logic tasks, indicating strong rule-based reasoning. It also performs competitively in search tasks, though spatial and sequential categories remain challenging.</p>
+                        </div>
+
+                          <figure>
+                            <img src="./assets/main_results2.png" alt="A descriptive alt text for your image" style="width: 600px;">
+                            <figcaption style="color: gray;">Performance of reasoning LLMs, generic LLMs, and our trained LLMs on Enigmata-Eval</figcaption>
+                          </figure>
+
+                    </div>
+
+                    
+                    <div class="content">
+                        <h4>🌟 Generalization with Scaling: Free Lunch from Enigmata </h4>
+                    <div class="content">
+                        <p>Incorporating the <strong>Enigmata-Data</strong> synthetic puzzle dataset into large-scale model training significantly boosts general reasoning, including math and STEM, surprisingly improving performance on challenging benchmarks like AIME and GPQA Diamond. This demonstrates an unexpected <strong>generalization benefit</strong> for advanced reasoning models.</p>
+                    </div>
+
+                      <figure>
+                        <img src="./assets/seed_thinking.png" alt="A descriptive alt text for your image" style="width: 600px;">
+                        <figcaption style="color: gray;">Results on benchmarks for general reasoning capabilities</figcaption>
+                      </figure>
+                    </div>
                 </div>
             </div>
         </div>
